@@ -1,6 +1,7 @@
 # 声明
 
 1、数据来源：[智能盘点—钢筋数量AI识别](智能盘点-钢筋数量AI识别 竞赛 - DataFountain)
+
 由于竞赛平台协议有规定，未经许可暂不能公开数据集。
 
 2、yolov5地址[YOLOv5](ultralytics/yolov5).
@@ -69,12 +70,13 @@ labels把数据集格式转换成yolo_txt格式，即将每个xml标注提取bbo
 安装时需要有vs软件，否则会报错。
 
 百度云链接：https://pan.baidu.com/s/1gxI7a_-68-NyU67wQMIDJw
+
 提取码：tpbj
 
-'''python
+```python
 cd cocoapi/PythonAPI  
 python setup.py build_ext install
-'''
+```
 
 ## Step3：模型训练
 
@@ -86,25 +88,25 @@ python setup.py build_ext install
 
 ### 2、修改train文件
 
-'''
+```
 python train.py --img-size 640 --epochs 200 --data data/steel.yaml --batch-size 8 --weights weights/yolov5s.pt --cfg models/yolov5s.yaml --device 0
-'''
+```
 
 ### 3、模型测试
 
 在有标注的测试集或验证集上进行模型效果的评估，在test.py文件中指定配置文件和模型训练的结果，运行即可完成模型测试。
 
-'''
+```
 python test.py  --data data/steel.yaml --weights runs/exp10/weights/best.pt --augment
-'''
+```
 
 ### 4、模型推理
 
 对没有标注的文件进行推理，修改detect.py文件指定测试图片和测试模型的路径，即可完成模型推理。
 
-'''
+```
 python detect.py --weights runs/train/exp10/weights/best.pt --source inference/ --device 0 --save-txt --conf-thres 0.5
-'''
+```
 
 我这里还修改了detect中图形表示，将方框修改成了圆框，并将数字标注在了识别的结果上。
 
